@@ -1,0 +1,691 @@
+:root {
+  color: #102033;
+  background: #ecf4ff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --ink: #102033;
+  --muted: #64748b;
+  --panel: rgba(255, 255, 255, 0.88);
+  --panel-strong: #ffffff;
+  --primary: #635bff;
+  --primary-dark: #493fd3;
+  --accent: #00c2ff;
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --ring: rgba(99, 91, 255, 0.18);
+  --shadow: 0 24px 70px rgba(48, 68, 112, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(0, 194, 255, 0.26), transparent 35rem),
+    radial-gradient(circle at 80% 10%, rgba(99, 91, 255, 0.28), transparent 32rem),
+    linear-gradient(135deg, #eef7ff 0%, #f8fbff 48%, #e8edff 100%);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: stretch;
+  min-height: 420px;
+}
+
+.hero__content,
+.status-card,
+.overview article,
+.stage-map,
+.lesson-card {
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(22px);
+}
+
+.hero__content {
+  position: relative;
+  overflow: hidden;
+  border-radius: 34px;
+  padding: clamp(28px, 6vw, 72px);
+}
+
+.hero__content::after {
+  position: absolute;
+  right: -110px;
+  bottom: -150px;
+  width: 330px;
+  height: 330px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.24), rgba(0, 194, 255, 0.18));
+  content: "";
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0 0 16px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--primary-dark);
+  background: rgba(99, 91, 255, 0.12);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 760px;
+  margin-bottom: 18px;
+  color: var(--ink);
+  font-size: clamp(3.4rem, 11vw, 7.4rem);
+  line-height: 0.86;
+  letter-spacing: -0.09em;
+}
+
+.hero__lead {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  color: #334155;
+  font-size: clamp(1rem, 2.3vw, 1.28rem);
+  line-height: 1.9;
+}
+
+.hero__actions,
+.lesson-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.primary-action,
+.ghost-action {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0 20px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.primary-action {
+  color: white;
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  box-shadow: 0 14px 32px rgba(99, 91, 255, 0.34);
+}
+
+.ghost-action {
+  color: var(--primary-dark);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(99, 91, 255, 0.18);
+}
+
+.primary-action:hover,
+.ghost-action:hover {
+  transform: translateY(-2px);
+}
+
+.status-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 34px;
+  padding: 28px;
+}
+
+.level-ring {
+  --progress: 0%;
+  display: grid;
+  width: 168px;
+  height: 168px;
+  place-items: center;
+  margin: 0 auto 24px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, #fff 58%, transparent 60%),
+    conic-gradient(var(--primary) var(--progress), rgba(99, 91, 255, 0.14) 0);
+}
+
+.level-ring span {
+  color: var(--primary-dark);
+  font-size: 2.1rem;
+  font-weight: 900;
+}
+
+.status-card__label {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-card h2 {
+  margin-bottom: 8px;
+  font-size: 1.45rem;
+}
+
+.status-card p {
+  color: var(--muted);
+}
+
+.xp-bar {
+  overflow: hidden;
+  width: 100%;
+  height: 12px;
+  margin: 18px 0 12px;
+  border-radius: 999px;
+  background: rgba(99, 91, 255, 0.12);
+}
+
+.xp-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+
+.overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.overview article {
+  border-radius: 26px;
+  padding: 22px;
+}
+
+.overview span {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 14px;
+  color: white;
+  background: var(--primary);
+  font-weight: 900;
+}
+
+.overview h2 {
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.overview p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 390px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.stage-map,
+.lesson-card {
+  border-radius: 30px;
+}
+
+.stage-map {
+  position: sticky;
+  top: 20px;
+  padding: 18px;
+}
+
+.stage-map__group + .stage-map__group {
+  margin-top: 22px;
+}
+
+.stage-map__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.stage-map__heading h2 {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.stage-map__heading span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.stage-buttons {
+  display: grid;
+  gap: 10px;
+}
+
+.stage-button {
+  display: grid;
+  grid-template-columns: 34px 38px 1fr;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  border-radius: 18px;
+  padding: 12px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.stage-button:hover,
+.stage-button.is-active {
+  transform: translateY(-1px);
+  background: white;
+  box-shadow: 0 16px 32px rgba(48, 68, 112, 0.12);
+}
+
+.stage-button.is-active {
+  outline: 3px solid var(--ring);
+}
+
+.stage-button.is-complete {
+  background: rgba(236, 253, 245, 0.9);
+}
+
+.stage-button__number {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 12px;
+  color: white;
+  background: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.stage-button.is-complete .stage-button__number {
+  background: var(--success);
+}
+
+.stage-button__emoji {
+  font-size: 1.42rem;
+}
+
+.stage-button strong,
+.stage-button small {
+  display: block;
+}
+
+.stage-button strong {
+  font-size: 0.94rem;
+}
+
+.stage-button small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.lesson-card {
+  padding: clamp(20px, 4vw, 36px);
+}
+
+.lesson-card__topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.difficulty {
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: var(--primary-dark);
+  background: rgba(99, 91, 255, 0.12);
+}
+
+.difficulty--実践 {
+  color: #9a5a00;
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.difficulty--応用 {
+  color: #0f766e;
+  background: rgba(20, 184, 166, 0.15);
+}
+
+.lesson-card__header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.lesson-card__header p {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lesson-card__header h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.65rem, 4vw, 2.7rem);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.lesson-emoji {
+  display: grid;
+  flex: 0 0 74px;
+  width: 74px;
+  height: 74px;
+  place-items: center;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.16), rgba(0, 194, 255, 0.16));
+  font-size: 2.1rem;
+}
+
+.story {
+  border-left: 4px solid var(--primary);
+  margin-bottom: 22px;
+  padding: 14px 0 14px 16px;
+  color: #334155;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.lesson-section {
+  margin-top: 22px;
+}
+
+.lesson-section h3,
+.quiz-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.lesson-section p,
+.lesson-section li,
+.mission-card p,
+.tip-card p,
+.quiz-card p {
+  color: #334155;
+  line-height: 1.8;
+}
+
+.lesson-section ol {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.lesson-section li + li {
+  margin-top: 6px;
+}
+
+.mission-card,
+.tip-card,
+.quiz-card {
+  margin-top: 20px;
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.mission-card {
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.11), rgba(0, 194, 255, 0.11));
+}
+
+.tip-card {
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.mission-card span,
+.tip-card span {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--primary-dark);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tip-card span {
+  color: #9a5a00;
+}
+
+.mission-card p,
+.tip-card p {
+  margin-bottom: 0;
+}
+
+.quiz-card {
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.quiz-options button {
+  min-height: 48px;
+  border: 1px solid rgba(99, 91, 255, 0.16);
+  border-radius: 16px;
+  padding: 12px 14px;
+  color: var(--ink);
+  background: white;
+  cursor: pointer;
+  text-align: left;
+}
+
+.quiz-options button.is-selected {
+  border-color: var(--primary);
+  background: rgba(99, 91, 255, 0.1);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.quiz-submit {
+  width: 100%;
+}
+
+.quiz-result {
+  margin: 14px 0 0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  font-weight: 800;
+}
+
+.quiz-result--correct {
+  color: #166534;
+  background: rgba(34, 197, 94, 0.14);
+}
+
+.quiz-result--incorrect {
+  color: #991b1b;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.clear-badge {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 14px;
+  color: #166534;
+  background: rgba(34, 197, 94, 0.14);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+@media (max-width: 920px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .hero,
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .status-card {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .level-ring {
+    width: 120px;
+    height: 120px;
+    margin: 0;
+  }
+
+  .level-ring span {
+    font-size: 1.5rem;
+  }
+
+  .xp-bar,
+  .status-card strong {
+    grid-column: 1 / -1;
+  }
+
+  .overview {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-map {
+    position: static;
+  }
+
+  .stage-buttons {
+    display: grid;
+    grid-auto-columns: minmax(230px, 1fr);
+    grid-auto-flow: column;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .stage-button {
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 12px;
+  }
+
+  .hero__content,
+  .status-card,
+  .stage-map,
+  .lesson-card {
+    border-radius: 24px;
+  }
+
+  .hero__actions,
+  .lesson-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primary-action,
+  .ghost-action {
+    width: 100%;
+  }
+
+  .status-card {
+    grid-template-columns: 96px 1fr;
+    padding: 18px;
+  }
+
+  .level-ring {
+    width: 96px;
+    height: 96px;
+  }
+
+  .lesson-card__header {
+    align-items: flex-start;
+  }
+
+  .lesson-emoji {
+    flex-basis: 58px;
+    width: 58px;
+    height: 58px;
+    border-radius: 20px;
+    font-size: 1.65rem;
+  }
+
+  .mission-card,
+  .tip-card,
+  .quiz-card {
+    padding: 16px;
+  }
+}
