@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 
 type Difficulty = '基礎' | '実践' | '応用';
 
@@ -562,7 +562,7 @@ function App() {
         </div>
 
         <aside className="status-card" aria-label="学習進捗">
-          <div className="level-ring" style={{ '--progress': `${completionPercent}%` } as React.CSSProperties}>
+          <div className="level-ring" style={{ '--progress': `${completionPercent}%` } as CSSProperties}>
             <span>{completionPercent}%</span>
           </div>
           <div>
